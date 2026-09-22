@@ -1,0 +1,52 @@
+/*load the font first so we can use it in our style sheet*/
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+/* how we applu the custom font */
+/*font-family: "Kaushan Script", cursive; */
+
+* {
+margin: 0;
+padding: 0;
+}
+
+/*add out custom font as the default font*/
+html {
+font-family: "Kaushan Script", cursive;
+
+
+/* devclare and use a full size image background */
+background: url("../img/bg.jpg") no repeat center center fixed;
+background-size: cover;
+}
+
+.container {
+    width: 900px;
+    margin: 0 auto;
+    font-size: 0;
+}
+
+.polaroid {
+    width: 260px;
+    margin: 20px;
+/* 260 + 20 + 20 = 300px whcich stacks nice in our container of 900 px */
+display: inline-block;
+}
+
+/* descendant selector for a specific pattern of elements.
+targets only the images inside a polarooid div */
+
+.polaroid img {
+   /*this is a common style for the image
+   tag everywhere, and the pattern is
+   tomake the image 100% the width of
+   its parent then size the parent*/
+   width: 100%;
+   height: auto;
+   /* add a uniform border */
+   border: 10px solid #ccc;
+   border-bottom-width: 45px;
+}
+.polaroid p {
+    /* 1 rem is 16px for now.*/
+   font-size: 1rem;
+   padding: 10px;
+}
