@@ -1,6 +1,6 @@
 # OZDOG designs! - my portfolio
 
-Live site: https://laraozdogan.github.io/WebDevClassNotesLO/Midterm/
+Live site: https://laraozdogan.github.io/WebDevClassNotesLO/midterm_project/
 
 ## Concept
 
