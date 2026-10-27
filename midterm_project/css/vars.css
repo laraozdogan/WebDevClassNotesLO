@@ -1,0 +1,8 @@
+/* CSS Variables -- usually in global.css or variables.css */
+:root {
+  --c-bg: #6d6c5d;
+  --c-text: #eff7cf;
+  --c-text-soft: #d3dcb5;
+  --c-hover: #858975;
+  --c-mask: #585d449f;
+}

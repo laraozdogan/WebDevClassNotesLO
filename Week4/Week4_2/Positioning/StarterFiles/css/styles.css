@@ -1,0 +1,70 @@
+
+
+/* grouped selector, think list of selectors*/
+.html,
+body {
+margin: 0;
+}
+/* we are going to make generic styles so we can see our div elements*/
+
+div, header {
+/* border shorthand assigns three values at once:
+border width, border style, and border color*/
+border: 1px  solid red;
+padding: 50px;
+}
+
+/* absolute positioned elements without a positioned
+parent or anscestor. position = static. this is how absolutely 
+positioned elements behave on their own*/
+.abs-no-parent{
+background-color: cornflowerblue;
+position: absolute;
+top: 20%;
+right: 200px;
+
+
+}
+.rel-parent {
+    background-color: blueviolet;
+    width: 50%;
+    /* this doesnt work unless that element is inside of an element with
+    a defined height
+    viewport width or height take a percentage of your screens height
+    or width*/
+    height: 200vh;
+/* whenever you want to absolutely position an element inside of or
+relative to a parent element that parent element must be positioned.
+relative. aka not default which is static*/
+position: relative;
+}
+
+.abs-rel-parent {
+background-color: rgba(12, 237, 16, 0.5);
+width: 200px;
+height: 200px;
+position: absolute;
+bottom: 100px;
+right: 0px;
+}
+
+header {
+height: 100px;
+width: 100%;
+position: fixed;
+background-color: coral;
+/* think layers in a drawing program, the higher the z pushes elements in
+front of others and negative z sends them back from where they render by default*/
+z-index: 10
+}
+
+.cover {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    z-index: 10;
+    
+}

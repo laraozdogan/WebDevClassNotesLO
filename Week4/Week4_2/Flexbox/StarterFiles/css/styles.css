@@ -1,0 +1,173 @@
+/* display flec is applied to the parent element, aka the thing that contains flex
+direction defaults to row
+felx wrap fefaults to no wrap which means all items within will squisj onto one
+Justify content - applied to the container/elemenet that desplays flex
+*/
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+img {
+    width: 100%;
+    height: autio
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    /* if you want your items to wrap/stack onto a new line when they run out of space you
+    have to say wrap flex wrap */
+    flex-wrap: wrap;
+    border: 1px solid purple;
+    background-color: rgba(255 0 255, .3);
+    min-height: 400px;
+}
+
+.item {
+    width: 30%;
+    height: 300px;
+    border: 1px solid cornflowerblue;
+    background-color: rgba(0, 0, 255, 0.3);
+
+}
+
+/* variations usinf atomic ss*/
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.justify-start {
+    justify-content: flex-start;
+}
+
+.justify-end {
+    justify-content: flex-end;
+}
+    
+.justify-between {
+ justify-between: space-between;
+
+}
+
+.justify-even {
+    justify-content: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+/* align items gets applied to the cross axis*/
+
+.align-start {
+    align-items: flex-start;
+}
+
+
+.align-end {
+    align-items: flex-end;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.align-stretch {
+    align-items: stretch;
+}
+/* any element that is a direct descendant of an element or parent that has the class align stretch */
+.align-stretch > * {
+    height: auto;
+}
+
+.align-self {
+    align-self: stretch;
+    height: auto;
+}
+
+/* classic layout example */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-item: center;
+    width: 100%;
+    padding: 0 5%;
+    min-height: 100px;
+    background-color: cornflowerblue;
+}
+ /* this is a box around the two items we want
+ to stack next to one another*/
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.grid-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-item: center;
+    background-color: darkcyan;
+}
+
+.grid-item {
+    width: 23%;
+    margin: 1%;
+}
+
+.secondary-nav {
+    min-width: 25%;
+    background-color: aquamarine;
+}
+
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+/* no commas means we are looking
+for the html pattern of list items li
+inside of another element with the class of menu. */
+.menu li {
+    border-bottom: 1px solig grey;
+}
+
+.menu span {
+    padding: 1rm;
+    font-size: 2rm;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    width: 100%;
+    display-flex: flex;
+    align-items: center;
+}
+
+.menu a:hover {
+    background-color: rgba(0,0,0,.1)
+}
+
+.footer {
+    min-height: 100px;
+    background-color: violet;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: white;
+    padding: 3%;
+}

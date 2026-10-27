@@ -1,0 +1,531 @@
+@import url('vars.css');
+
+/* global?? */
+
+* {
+  box-sizing: border-box;
+}
+
+/* hero + background stuff */
+html,
+body {
+  margin: 0;
+  font-family: 'IM Fell DW Pica', Georgia, serif;
+  background-color: var(--c-bg);
+  background-image: url('../img/texture.jpg');
+  background-repeat: repeat;
+}
+
+/* default text */
+html {
+  font-size: 120%;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+/* font */
+h1,
+h2 {
+  font-weight: normal;
+}
+
+/* NAV BAR */
+
+/* nav spacing stuff */
+nav {
+  position: relative;
+}
+
+/* doggy icon image */
+nav img {
+  position: absolute;
+  top: 50%;
+  left: 1.25rem;
+  width: 2rem;
+  transform: translateY(-50%);
+}
+
+/* nav navigation + flex */
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background-color: var(--c-bg);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+nav a {
+  display: block;
+  padding: 1.25rem 3.5rem;
+  color: var(--c-text);
+  font-size: 1.25rem;
+  text-decoration: none;
+  transition: background-color 0.25s ease;
+}
+
+/* hover fade */
+
+nav a:hover {
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--c-hover) 20%,
+    var(--c-hover) 80%,
+    transparent 100%
+  );
+}
+
+/* word growing */
+nav a span {
+  display: inline-block;
+  transition: all 0.25s ease;
+}
+
+nav a:hover span {
+  transform: scale(1.2);
+}
+
+/* dropdown menu */
+
+nav li {
+  position: relative;
+}
+
+nav li ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 14rem;
+  z-index: 10;
+  background-color: var(--c-bg);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+nav li:hover ul {
+  display: block;
+}
+
+nav li li a {
+  padding: 0.75rem 3.5rem;
+  font-size: 1.2rem;
+}
+
+/* jumbotron */
+
+.hero {
+  width: 100vw;
+  max-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+/* title and tagline under the hero */
+.title {
+  margin: 0;
+  padding: 1rem 1.5rem 0;
+  text-align: center;
+  font-size: 5rem;
+  color: var(--c-text);
+}
+
+.statement {
+  margin: 0;
+  padding: 0.5rem 1.5rem 2rem;
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--c-text);
+}
+
+/* meet ozdog section */
+
+.intro {
+  max-width: 45rem;
+  margin: 0 1.5rem;
+  padding-bottom: 3rem;
+  color: var(--c-text);
+}
+
+.intro h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.75rem;
+}
+
+.intro p {
+  margin: 0;
+  line-height: 1.6;
+  color: var(--c-text-soft);
+}
+
+/* moving panel */
+
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* window borderss for drop shadows */
+.panel {
+  margin: 0 1.5rem 1.5rem;
+  padding-bottom: 1rem;
+  overflow: hidden;
+}
+
+.panel h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.75rem;
+  color: var(--c-text);
+}
+
+/* slides timing */
+.marquee {
+  display: flex;
+  width: 267%;
+  animation: slide 25s linear infinite;
+}
+
+/* moving panel pause */
+.marquee:hover {
+  animation-play-state: paused;
+}
+
+.slide {
+  flex: 0 0 12.5%;
+  padding: 0 0.5rem;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
+}
+
+.slide img {
+  display: block;
+}
+
+/* pics gallery */
+
+.bento {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  height: 28vw;
+}
+
+.tile {
+  flex: 1 1 0%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+.tile img {
+  display: block;
+}
+
+/* wide files */
+.wide {
+  flex: 2 1 0%;
+}
+
+/* stacking */
+.stack {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mask {
+  /* matching edges */
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  /* centering */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  text-align: center;
+  background-color: var(--c-mask);
+  color: var(--c-text);
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.mask h2 {
+  margin: 0;
+}
+
+.mask p {
+  font-style: italic;
+}
+
+.tile:hover .mask {
+  opacity: 1;
+}
+
+/* abt page */
+
+.about {
+  /* sizing stuff */
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--c-text);
+}
+
+/* about photo hover doodles */
+.photo {
+  width: 20%;
+  position: relative;
+}
+
+.photo img {
+  display: block;
+  border: 4px solid var(--c-text);
+}
+
+.silly {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.photo:hover .silly {
+  opacity: 1;
+}
+
+.about article {
+  width: 75%;
+}
+
+/* contact form */
+
+.contact {
+  max-width: 45rem;
+  margin: 0;
+}
+
+.field {
+  margin-bottom: 1rem;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--c-text);
+  background-color: var(--c-text);
+  color: var(--c-bg);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.field textarea {
+  height: 8rem;
+}
+
+.contact button {
+  padding: 0.5rem 1.5rem;
+  border: 1px solid var(--c-text);
+  background-color: var(--c-bg);
+  color: var(--c-text);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.contact button:hover {
+  background-color: var(--c-hover);
+}
+
+/* works hub */
+
+.hub {
+  padding: 2rem 1.5rem;
+  text-align: center;
+  color: var(--c-text);
+}
+
+.hub h1 {
+  margin: 0 0 1.5rem;
+  font-size: 3rem;
+}
+
+.choices {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.choices a {
+  flex: 0 0 40%;
+  padding: 2rem 1rem;
+  border: 1px solid var(--c-text);
+  color: var(--c-text);
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.choices a:hover {
+  background-color: var(--c-hover);
+}
+
+/* footer */
+
+footer {
+  margin: 2rem 1.5rem 0;
+  padding: 1rem 0 2rem;
+  border-top: 1px solid var(--c-text);
+  color: var(--c-text);
+  text-align: left;
+}
+
+footer p {
+  margin: 0;
+  color: var(--c-text-soft);
+}
+
+footer .name {
+  font-size: 1.25rem;
+}
+
+footer .subtext {
+  margin-top: 0.6rem;
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
+/* media queries and resizing */
+
+/* resizing fixes for pic titles*/
+@media screen and (max-width: 1200px) {
+  .mask {
+    padding: 0.5rem;
+  }
+
+  .mask h2 {
+    font-size: 1.1rem;
+  }
+
+  .mask p {
+    margin: 0.25rem 0 0;
+    font-size: 0.8rem;
+  }
+}
+
+/* only my show title so it doesn't break */
+@media screen and (min-width: 768px) and (max-width: 950px) {
+  .mask p {
+    display: none;
+  }
+}
+
+/* iphone */
+@media screen and (width < 768px) {
+  nav img {
+    left: 0.5rem;
+    width: 1.75rem;
+  }
+
+  nav a {
+    padding: 1rem 1.25rem;
+    font-size: 1.1rem;
+  }
+
+  nav li li a {
+    padding: 0.75rem 1.25rem;
+  }
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .statement {
+    font-size: 1.6rem;
+  }
+
+  /* slides  */
+  .marquee {
+    width: 400%;
+  }
+
+  /* stacking for phone */
+  .bento {
+    padding: 0.75rem;
+  }
+
+  .row {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .tile,
+  .wide,
+  .stack {
+    flex: 0 0 auto;
+  }
+
+  .about {
+    flex-direction: column;
+  }
+
+  .photo {
+    width: 50%;
+  }
+
+  .about article {
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+
+  .choices a {
+    flex: 0 0 100%;
+  }
+}
+
+/* less motion thing */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

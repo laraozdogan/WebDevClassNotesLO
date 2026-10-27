@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>about</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&display=swap"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <!-- nav bar -->
+    <header>
+      <nav>
+        <img src="./img/icon.png" alt="OZDOG dog icon" />
+        <ul>
+          <li><a href="index.html"><span>home</span></a></li>
+          <li><a href="about.html"><span>about</span></a></li>
+          <li>
+            <a href="works.html"><span>works</span></a>
+            <ul>
+              <li><a href="digital.html"><span>digital</span></a></li>
+              <li><a href="traditional.html"><span>traditional</span></a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- about page info -->
+    <div class="about">
+      <div class="photo">
+        <img src="./img/notme.jpg" alt="portrait of me" />
+        <img
+          class="silly"
+          src="./img/notmesilly.jpg"
+          alt="portrait with doodles drawn over it"
+        />
+      </div>
+      <article>
+        <h1>about me!</h1>
+        <p>
+          hi! my name is Lara Ozdogan, and I am a current Junior at NYU studying
+          Integrated Design &amp; Media as well as Drama. I enjoy designing and
+          creating in a variety of mediums, from digital to traditional.
+        </p>
+        <p>thanks for visiting!</p>
+
+        <h2>contact me!</h2>
+        <p>Email: laramayaozdogan@gmail.com</p>
+
+        <!-- contact form -->
+        <div class="contact">
+          <form action="https://formspree.io/f/mvkkageq" method="POST">
+            <div class="field">
+              <label for="name">name:</label>
+              <input id="name" name="name" type="text" required />
+            </div>
+            <div class="field">
+              <label for="email">email:</label>
+              <input id="email" name="email" type="email" required />
+            </div>
+            <div class="field">
+              <label for="message">message:</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+            <input
+              type="hidden"
+              name="subject"
+              value="New Submission From: {{name}}"
+            />
+            <button type="submit">send</button>
+          </form>
+        </div>
+      </article>
+    </div>
+
+    <!-- footer -->
+    <footer>
+      <p class="name">Lara Ozdogan</p>
+      <p class="subtext">OZDOG designs - with joy in mind</p>
+    </footer>
+  </body>
+</html>
