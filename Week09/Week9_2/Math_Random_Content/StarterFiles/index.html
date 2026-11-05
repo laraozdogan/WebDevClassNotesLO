@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Show Page</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <!-- Where Tuesday ended, plus one new empty element: the lineup list.
+         If you kept your own file from Tuesday, use that one instead and just
+         copy the <section class="lineup-wrap"> block below into it. -->
+
+    <article class="ticket">
+      <header class="poster">
+        <p class="presents">The Fillmore East presents</p>
+        <h1 class="billing" id="billing"></h1>
+        <p class="where-when" id="where-when"></p>
+      </header>
+
+      <p class="status" id="status"></p>
+
+      <section class="order">
+        <h2>Your order</h2>
+
+        <p class="line" id="price-line"></p>
+        <p class="line" id="fee-line"></p>
+        <p class="line discount" id="discount-line"></p>
+
+        <p class="total">
+          <span>Total</span>
+          <strong id="total"></strong>
+        </p>
+
+        <p class="fine-print" id="fine-print"></p>
+      </section>
+
+      <!-- NEW today -->
+      <section class="lineup-wrap">
+        <h2>Running order</h2>
+        <ul class="lineup" id="lineup"></ul>
+        <p class="tagline" id="tagline"></p>
+      </section>
+    </article>
+
+    <script>
+      /* ---------- Tuesday's code, so nobody is stuck ----------
+         Everything below is where we finished last class. Today we replace
+         the hard-coded facts at the top with randomly chosen ones. */
+
+
+         // these r lets now bc they r being assigned content down below w the random let picker
+      let headliner = 'Bad Moon Rising'
+      let support = 'The Paper Cuts'
+      let venue = 'The Fillmore East'
+      let doors = 'Fri 13 Nov, doors 8pm'
+
+
+function randomBetween(min, max){
+  return Math.floor(Math.random * (max - min +1)) + min
+}
+
+ticketPrice = randomBetween(12, 45) + 0.5
+capacity = randomBetween(120, 400)
+ticketsSold = randomBetween(capacity-25, capacity)
+quantity = randomBetween(1, 4)
+
+
+
+      let ticketPrice = 18.5
+      let capacity = 250
+      let ticketsSold = 243
+      let serviceFeeRate = 0.12
+      let studentPrice = 5
+
+      const isStudent = true
+      let quantity = 3
+
+      const ticketsLeft = capacity - ticketsSold
+      const isSoldOut = ticketsLeft === 0 // 0 and or false is also true here if we use ==. alwats use == unless u have a solid reason not to
+      const isAlmostSoldOut = ticketsLeft < 10
+
+      const subtotal = ticketPrice * quantity
+      const serviceFee = subtotal * serviceFeeRate
+      // ternary - fancy shorthand if / else condition ? what to return if true : what to return if false
+      const discount = isStudent ? studentPrice : 0
+      const total = subtotal + serviceFee - discount
+// template literals, or template strings
+      const billing = `${headliner.toUpperCase()} + ${support}`
+      const whereWhen = `${venue} · ${doors}`
+
+      let status
+
+      if (isSoldOut) {
+        status = 'Sold out — join the waiting list'
+      } else if (isAlmostSoldOut) {
+        status = `Hurry — only ${ticketsLeft} tickets left`
+      } else {
+        status = 'Tickets available'
+      }
+
+      // if this is here we manipulate tje DOM
+      document.querySelector('#billing').textContent = billing
+      document.querySelector('#where-when').textContent = whereWhen
+      document.querySelector('#status').textContent = status
+      document.querySelector('#price-line').textContent = `${quantity} × $${ticketPrice.toFixed(2)}  —  $${subtotal.toFixed(2)}`
+      document.querySelector('#fee-line').textContent = `Service fee  —  $${serviceFee.toFixed(2)}`
+      document.querySelector('#discount-line').textContent = isStudent
+        ? `Student discount  —  −$${discount.toFixed(2)}`
+        : ''
+      document.querySelector('#total').textContent = `$${total.toFixed(2)}`
+      document.querySelector('#fine-print').textContent = `All sales final. ${ticketsLeft} of ${capacity} tickets remaining.`
+
+      /* ---------- Today's code goes below this line ---------- */
+
+/* ============================================
+
+1. ARRAYS - one variable holding a list of values,
+Square brackets, comma separated values within
+
+=============================================== */
+
+      const headliners = [
+      'Bad Moon Rising',
+      'Velvet Static',
+      'Dial Tone',
+      'Mountain Time',
+      'Kerosene Club',
+      'Paper Cuts'
+    ]
+    
+    const supports = [
+      'Low Ceiling',
+      "The Ferry Lights",
+      'Tiny Mirrors',
+      'Garden State Radio'
+    ]
+
+    const DJS = [
+      'DJ Spinning Jenny',
+      'DJ Scratchy',
+      'DJ Turntable Tim'
+    ]
+
+    const venues = [
+      'The Fillmore East',
+      'The Bowery Ballroom',
+      'The Roxy',
+      'The Troubadour'
+    ]
+
+    const nights = [
+      'Fri 13 Nov, doors 8pm',
+      'Sat 14 Nov, doors 7pm',
+      'Sun 15 Nov, doors 6pm'
+
+  
+    ]
+
+     const taglines = [
+      'A night of unforgettable music',
+      'The best live show in town',
+      'Get ready to rock!',
+      'An evening of pure magic']
+
+/* ============================================
+
+2. PICKING ONE AT RANDOM
+Math.random() gives us a float from 0 up to but not including 1
+multiply by the length, floor it,
+
+=============================================== */
+
+console.log(headliners.length) // gives us a count of items in the array
+console.log(log(headliners[5])) // computers start counting at 0 so the last index is 5 not 6
+console.log(headliners[headliners.length - 1]) // if we dont know how many slots there are in an array,
+// the way to find the last one is to subtract 1 from the length of the array
+
+console.log(math.random())
+
+// sometimes we want to pick between 0 and 1 for the true false situation
+function randomTrueFalse() {
+// any variable declared inside of {} is scoped
+// this var and its name and usability live and die within this function
+
+//math.round(valueToRound)
+
+const rn = math.random()
+// if we want a function to fie us a value to use elsewhere
+// (like assign it to a variable or a math equation, we have to return that data/var)
+return rn
+// this will work because it is in the same scope it was defined
+// to all the function
+console.log(rn)
+}
+
+//console/log(randomTrueFalse)
+  // to call the function
+  // this lofs undefined because rn is scoped (not global) so it doesnt exist outside the functions {}
+  // console.log(rn)
+let isOn // delared but never initialized / assigned a value this is why we need let
+const randomValue = randomTrueFalse()
+
+if (randomValue == 0){
+  isOn = "Heads"
+} else {
+  isOn = "Tails"
+}
+
+/* if (randomValue == 1) {
+console.log('true
+isOn = true
+} else {
+  isOn =false
+}
+  // console.log(randomTrueFalse())
+*/
+
+console.log(isOn)
+
+//Another hielper function to get a random number btwn 0 and x
+// we know the min is 0, but we need to pass in a max var/value/parameter/argument
+function randNumToMax(max) {
+  // first we multiply out random float by the max. then we either round it, ceil it, or floor it
+  // ceil always rounds up
+  // floor always rounds down aka drops the decimals all together
+  const rn = Math.random() = max
+  //console.log(rn)
+  return rn
+}
+
+// randomToMax(10)
+// we use the 0 to max random number function combined with Array.length
+//to get a random index/value out of an array
+
+const randIndex = randNumToMax(headliners.length)
+console.log(headliners[randIndex])
+
+// this one passes in an array for our first ARG for a PARAM
+// use the length for a random number btwn 0 and the last slot in our array
+// return the valye at that random number index
+
+function pickRandom(list){
+  const index = Math.floor(Math.random()) * list.length
+  return list[index]
+}
+
+// this is how we will populate random content!
+/* console.log(pickRandom(headliners))
+console.log(pickRandom(supports))
+*/
+
+headliner = pickRandom(headliners)
+support = pickRandom(supports)
+venue = pickRandom(venues)
+doors = '${pickRandom(doors)}, doors 8pm.'
+
+
+    </script>
+  </body>
+</html>
