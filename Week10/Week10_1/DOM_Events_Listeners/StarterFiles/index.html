@@ -83,17 +83,104 @@
         return Math.floor(Math.random() * (max - min + 1)) + min
       }
 
-      const headliner = pickRandom(headliners)
-      const support = pickRandom(supports)
-      const venue = pickRandom(venues)
-      const doors = `${pickRandom(nights)}, doors 8pm`
+// declare below as global variables but with no assigned values
+// this is a time to use LET
+// putting all of our "state" in once place, one fucntion that draws it. another to change it
 
-      const ticketPrice = randomBetween(12, 45) + 0.5
-      const capacity = randomBetween(120, 400)
-      const ticketsSold = randomBetween(capacity - 25, capacity)
+let headliner
+let support
+let vanue
+let doors
+let capacity
+let ticketsSold
+let lineup
+let tagline
+let accent
+
+let quantity = 2
+let promoCode = ''
+
+// these genuinely never change so we can keep pthem as cons
+
+ servicefeeRate = 0.12
+ studentPrice = 5
+ isStudent = true
+
+ MIN_TICKETS = 1
+ MAX_TICKETS = 4
+
+// roll a new show, only the facts/data no drawing/rendering here
+// whenever we call this functiion we assign new valyues to the global variables defined above
+
+function rollNewShow(){
+       headliner = pickRandom(headliners)
+       support = pickRandom(supports)
+       venue = pickRandom(venues)
+       doors = `${pickRandom(nights)}, doors 8pm`
+
+       ticketPrice = randomBetween(12, 45) + 0.5
+       capacity = randomBetween(120, 400)
+       ticketsSold = randomBetween(capacity - 25, capacity)
+
+      lineup = [pickRandom(djs), support, headliner]
+      tagline = pickRandom(taglines)
+      accent = pickRandom(accents)
+
+}
+
+// render -work everything out, then put it on the page
+// week 9 code but now wrapped in a finction so that we cam ca;; is again and ahgain
+
+function render() {
+const ticketsLeft = capacity - ticketsSold
+const isSoldOut = ticketsLeft === 0
+const isAlmostSoldOut = ticketsLeft < 10
+
+    const subtotal = ticketPrice * quantity
+      const serviceFee = subtotal * serviceFeeRate
+      const discount = isStudent ? studentPrice : 0
+      
+      const promoIsValid = promoCode === 'friend'
+      const promoDiscount = promoIsValid ? subtotal * 0.1 : 0
+      
+      
+      
+      
+      const total = subtotal + serviceFee - discount - promoDiscount
+
+      let status
+
+      if(isSoldOut){
+        status = 'Sold out — join the waiting list'
+      } else if (isAlmostSoldOut) {
+        status = `Hurry — only ${ticketsLeft} tickets left`
+      } else {
+        status = 'Tickets available'
+      }
+
+      let promoMsg = ''
+      if (promoCode = '') {
+        prpmoMsg = ''
+        else if (promoIsValid) {
+          promoMsg = 'Promo code applied'
+        } else {
+          promoMsg = 'Sorry, that code is not valid'
+      }
+
+      let lineupHTML = ''
+      for let i = 0; i < lineup.length; i++) {
+        const stripe = i % 2 === 0 ? 'stripe' : ''
+        lineupHTML += `<li class="${stripe}"><span class="time">${8 + i}pm</span>${lineup[i]}</li>`
+       }
+
+}
+
+/*
+      
       const serviceFeeRate = 0.12
       const studentPrice = 5
       const isStudent = true
+      
 
       let quantity = randomBetween(1, 4)
 
@@ -107,6 +194,7 @@
       const total = subtotal + serviceFee - discount
 
       let status
+*/
 
       if (isSoldOut) {
         status = 'Sold out — join the waiting list'
@@ -137,7 +225,43 @@
       document.querySelector('#tagline').textContent = pickRandom(taglines)
       document.body.style.setProperty('--accent', pickRandom(accents))
 
+const promoMsgEl = document.querySelector('#promo-msg')
+promoMsgEl.textContent = promoMsg
+// .classname = overwhrites any existing clasnames in element
+promoMsgEl.className = promoIsValid ? 'promo-msg ok' : 'promo-msg'
+
+// this wont log until we actually clal the fync
+
+//grab the minut/plus buttons to the bottom on the screen
+document.querySelector('#plus').disabled = quantity === MAX_TICKETS
+document.querySelector('#minus').disabled = quantity === MIN_TICKETS
+
+// handlers
+functionhandelPlus() {
+  if {quantity < MAX_TICKETS} {
+    quantiti = quantity + 1
+    render()
+  }}
+
+   functiion handleiMinut() {
+    if (quantity > MIN_TICKETS) {
+      quantity = quantity - 1
+      render()
+
+   }
+
+   function handlePromo(event)) {
+    colsoole.log(target)
+    promoCose = event.target.value.trim().toUppercase()
+   }
       /* ---------- Today's code goes below this line ---------- */
+
+
+
+
+
+
+
     </script>
   </body>
 </html>

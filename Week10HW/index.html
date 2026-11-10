@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Halal Cart Generator</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <article class="ticket">
+      <header class="poster">
+        <p class="presents" id="presents"></p>
+        <h1 class="billing" id="billing"></h1>
+        <p class="where-when" id="where-when"></p>
+      </header>
+
+
+    <img id="pics" alt="halal food pics" />
+
+
+      <p class="status" id="status"></p>
+
+       <section class="order">
+      <h2>Your order</h2>
+
+      <p class="line" id="price-line"></p>
+      <p class="line" id="fee-line"></p>
+      <p class="line discount" id="discount-line"></p>
+
+      <p class="total">
+        <span>Total</span>
+        <strong id="total"></strong>
+      </p>
+
+      <p class="fine-print" id="fine-print"></p>
+    </section>
+
+    <section class="controls">
+      <div class="qty">
+        <span class="qty-label">Plates</span>
+        <button id="minus" type="button" aria-label="One fewer plate">−</button>
+        <span class="count" id="count"></span>
+        <button id="plus" type="button" aria-label="One more plate">+</button>
+      </div>
+
+      <div class="promo">
+        <label for="budget">Your budget ($)</label>
+        <input id="budget" type="number" value="20" />
+      </div>
+
+      <button class="roll" id="roll" type="button">New order</button>
+    </section>
+
+      <section class="lineup-wrap">
+        <h2>Your Halal Cart Meal!</h2>
+        <ul class="lineup" id="lineup"></ul>
+        <p class="tagline" id="tagline"></p>
+      </section>
+    </article>
+
+    <script>
+      /* =========================================================
+         1. arrays 
+         ========================================================= */
+
+      const proteins = [
+        'chicken',
+        'lamb',
+        'combo',
+        'falafel',
+        'beef']
+
+        const sauces = [
+          'white sauce',
+          'hot sauce',
+          'white and hot sauce']
+
+        const toppings = [
+          'lettuce',
+          'tomato',
+          'pickles',
+          'onions']
+
+        const carts =
+        ['Palladium',
+        'Bobst',
+        'Union Square Target',
+        'Washington Sqare Park']
+        
+        const tipAmts =
+        [0,
+        0.05,
+        0.08,
+        0.1]
+
+        const taglines =
+        ['Lowest prices in New York City',
+        'Best Halal in town',
+        'Open 24 hrs',
+        'Cash only']
+
+        const accents =
+        ['#e0504f', '#2f6f4e', '#3b4c9c', '#b4622a', '#6b3f7a']
+
+       const images = ['img/one.jpg', 'img/two.jpg', 'img/three.jpg', 'img/four.jpg']
+
+      /* =========================================================
+         2. picking at random
+         ========================================================= */
+
+      function pickRandom(list) {
+        const index = Math.floor(Math.random() * list.length)
+        return list[index]
+      }
+
+
+      function randomBetween(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min
+      }
+
+        /* =========================================================
+         3. diff meal every reload
+         ========================================================= */
+
+
+      // states - they are let because they change 
+      let protein
+      let sauce
+      let cart
+      let tipRate
+      let people
+      let platePrice
+      let lineLength
+      let topping
+      let tagline
+      let image
+      let accent
+      let budget = 20
+
+      //  they stay const becuase they don't change
+      const taxRate = 0.08875
+      const MIN_PLATES = 1
+      const MAX_PLATES = 4
+
+      // funcs
+
+      function rollNewOrder() {
+        protein = pickRandom(proteins)
+        sauce = pickRandom(sauces)
+        cart = pickRandom(carts)
+        tipRate = pickRandom(tipAmts)
+        people = randomBetween(1, 4)
+        platePrice = randomBetween(6, 9) + 0.5
+        lineLength = randomBetween(0, 6)
+        topping = pickRandom(toppings)
+        tagline = pickRandom(taglines)
+        image = pickRandom(images)
+        accent = pickRandom(accents)
+      }
+
+      function render() {
+
+        /* =========================================================
+           4. math and rules
+           ========================================================= */
+
+        const subtotal = platePrice * people
+        const tax = subtotal * taxRate
+        const tip = subtotal * tipRate
+        const total = subtotal + tax + tip
+        const perPerson = total / people
+
+        const isBigOrder = people > 2
+        const isOverBudget = total > budget
+
+        const waitMinutes = lineLength * 2 + (isBigOrder ? 2 : 0)
+        const isLongWait = waitMinutes > 7
+
+        /* =========================================================
+           5. status messages
+           ========================================================= */
+
+        let status
+        if (waitMinutes === 0) {
+          status = 'your food is ready!'
+        } else if (isLongWait) {
+          status = `long wait, your food is up in ${waitMinutes} minutes`
+        } else {
+          status = `short wait, your food is up in ${waitMinutes} minutes`
+        }
+
+        const plateWord = people === 1 ? 'plate' : 'plates'
+        const budgetNote = isOverBudget ? `total is over your $${budget} budget` : `total is under your $${budget} budget`
+        const orderSentence = `${people} ${plateWord} of ${protein} over rice with ${sauce}`
+
+        /* =========================================================
+           6. looping over the plates
+           ========================================================= */
+
+        const plate = [protein, 'rice', sauce, topping]
+
+        let plateHTML = ''
+
+        for (let i = 0; i < plate.length; i++) {
+          const stripe = i % 2 === 0 ? 'stripe' : ''
+          plateHTML += `<li class="${stripe}"><span class="time">#${i + 1}</span>${plate[i]}</li>`
+        }
+
+
+        /* =========================================================
+           7. on the page
+           ========================================================= */
+
+        document.querySelector('#presents').textContent = `${cart} halal cart`
+        document.querySelector('#billing').textContent = `${protein} over rice`
+        document.querySelector('#where-when').textContent = orderSentence
+        document.querySelector('#status').textContent = status
+        document.querySelector('#price-line').textContent = `${people} × $${platePrice.toFixed(2)}  —  $${subtotal.toFixed(2)}`
+        document.querySelector('#fee-line').textContent = `Tax  —  $${tax.toFixed(2)}`
+        document.querySelector('#discount-line').textContent = tip === 0 ? '' : `Tip (${Math.round(tipRate * 100)}%)  —  $${tip.toFixed(2)}`
+        document.querySelector('#total').textContent = `$${total.toFixed(2)}`
+        document.querySelector('#fine-print').textContent = `$${perPerson.toFixed(2)} per person · ${budgetNote}`
+        document.querySelector('#count').textContent = people
+        document.querySelector('#tagline').textContent = tagline
+
+        document.querySelector('#lineup').innerHTML = plateHTML
+        document.querySelector('#pics').src = image
+
+        /* =========================================================
+           8. random color scheme
+           ========================================================= */
+
+        document.body.style.setProperty('--accent', accent)
+
+        // log
+        console.log({
+          protein,
+          sauce,
+          cart,
+          people,
+          total,
+          waitMinutes })
+
+        document.querySelector('#minus').disabled = people === MIN_PLATES
+        document.querySelector('#plus').disabled = people === MAX_PLATES
+      }
+
+      // Handlers - Change the state, then render
+      function handlePlus() {
+        if (people < MAX_PLATES) {
+          people = people + 1
+          render()
+        }
+      }
+
+      function handleMinus() {
+        if (people > MIN_PLATES) {
+          people = people - 1
+          render()
+        }
+      }
+
+      function handleBudget(event) {
+        budget = Number(event.target.value)
+        render()
+      }
+
+      function handleRoll() {
+        rollNewOrder()
+        render()
+      }
+
+
+      document.querySelector('#plus').addEventListener('click', handlePlus)
+      document.querySelector('#minus').addEventListener('click', handleMinus)
+      document.querySelector('#budget').addEventListener('input', handleBudget)
+      document.querySelector('#roll').addEventListener('click', handleRoll)
+
+      rollNewOrder()
+      render()
+    </script>
+  </body>
+</html>
